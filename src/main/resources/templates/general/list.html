@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fw/fieldsToMapBase}">
+<head>
+	<title th:text="情報一覧"></title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<div layout:fragment="mainContent">
+
+		<!-- Userの年齢を更新するフォーム -->
+		<form th:action="@{/general/listUpdate}" th:object="${generalListForm}" th:method="post">
+
+			<div th:each="user, st : *{userList}">
+				<span th:text="*{userList[__${st.index}__].id}"></span>
+				<input type="text" th:field="*{userList[__${st.index}__].age}">
+			</div>
+
+			<input type="submit" class="btn btn-primary" value="Userの年齢を更新">
+    	</form>
+
+		<br>
+
+		<!-- Userの経歴を更新するフォーム -->
+	    <form th:action="@{/general/listUpdate}" th:object="${generalListForm}" th:method="post">
+
+			<div th:each="user, st : *{userList}">
+				<span th:text="*{userList[__${st.index}__].id}"></span>
+				<span th:text="*{userList[__${st.index}__].careers[0].fromDate}"></span>
+				<input type="text" th:field="*{userList[__${st.index}__].careers[0].contents}">
+				<span th:text="*{userList[__${st.index}__].careers[1].fromDate}"></span>
+				<input type="text" th:field="*{userList[__${st.index}__].careers[1].contents}">
+			</div>
+			<input type="submit" class="btn btn-primary" value="Userの経歴を更新">
+    	</form>
+
+		<br>
+
+		<!-- 本のタイトルを更新するフォーム -->
+    	<form th:action="@{/general/listUpdate}" th:object="${generalListForm}" th:method="post">
+
+			<div th:each="book : *{bookMap}">
+				<span th:text="${book.key}"></span>
+				<input type="text" th:field="${generalListForm.bookMap[__${book.getKey()}__].price}">
+			</div>
+
+			<!-- ボタン -->
+			<input type="submit" class="btn btn-primary" value="本の値段を更新">
+    	</form>
+
+	</div>
+</body>
+</html>

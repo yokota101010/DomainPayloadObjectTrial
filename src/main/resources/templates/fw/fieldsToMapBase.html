@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div layout:fragment="mainContent"></div>
+
+	<script th:inline="javascript">
+		var items = /*[[${fieldsToMapItems}]]*/ null;
+
+		var formTags = document.getElementsByTagName("form");
+
+		for(j=0; j<formTags.length; j++) {
+			var inputTags = formTags[j].getElementsByTagName("input");
+			var nm = new Array();
+
+			for(i=0; i<inputTags.length; i++) {
+				nm[i] = inputTags[i].getAttribute("name");
+			}
+
+			for(key in items){
+				if(!nm.includes(key)) {
+					var hiddenElem = document.createElement("input");
+					hiddenElem.type = "hidden";
+					hiddenElem.name= key;
+					hiddenElem.value = items[key];
+					formTags[j].appendChild(hiddenElem);
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>

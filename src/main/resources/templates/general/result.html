@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fw/fieldsToMapBase}">
+<head>
+	<title th:text="比較結果"></title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+	<div layout:fragment="mainContent">
+
+		<div>サービスから取得したUserList：</div>
+		<div th:text="${formServiceUserList}"></div>
+		<br>
+		<div>Formから取得したUserList：</div>
+		<div th:text="${fromFormUserList}"></div>
+
+		<br>
+		<div>------------------------------------------------------------</div>
+		<br>
+
+		<div>サービスから取得したBookMap：</div>
+		<div th:text="${fromServiceBookMap}"></div>
+		<br>
+		<div>Formから取得したBookMap：</div>
+		<div th:text="${fromFormBookMap}"></div>
+
+		<br>
+
+		<a href="/general/list">戻る</a>
+	</div>
+</body>
+</html>
