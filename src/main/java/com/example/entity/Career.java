@@ -16,7 +16,7 @@ public class Career {
 	private String fromDate;
 
 	@NotBlank
-	@Length(max=10)
+	@Length(max=100)
 	private String contents;
 
 	public Career(int id, String fromDate, String contents) {

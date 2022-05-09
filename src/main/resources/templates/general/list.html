@@ -28,9 +28,9 @@
 			<div th:each="user, st : *{userList}">
 				<span th:text="*{userList[__${st.index}__].id}"></span>
 				<span th:text="*{userList[__${st.index}__].careers[0].fromDate}"></span>
-				<input type="text" th:field="*{userList[__${st.index}__].careers[0].contents}">
+				<textarea rows="3" th:field="*{userList[__${st.index}__].careers[0].contents}"></textarea>
 				<span th:text="*{userList[__${st.index}__].careers[1].fromDate}"></span>
-				<input type="text" th:field="*{userList[__${st.index}__].careers[1].contents}">
+				<textarea rows="3" th:field="*{userList[__${st.index}__].careers[1].contents}"></textarea>
 			</div>
 			<input type="submit" class="btn btn-primary" value="Userの経歴を更新">
     	</form>

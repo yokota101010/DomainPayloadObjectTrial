@@ -14,10 +14,15 @@
 
 		for(j=0; j<formTags.length; j++) {
 			var inputTags = formTags[j].getElementsByTagName("input");
+			var textareaTags = formTags[j].getElementsByTagName("textarea");
 			var nm = new Array();
 
 			for(i=0; i<inputTags.length; i++) {
 				nm[i] = inputTags[i].getAttribute("name");
+			}
+
+			for(k=0; k<textareaTags.length; k++) {
+				nm[i+k] = textareaTags[k].getAttribute("name");
 			}
 
 			for(key in items){
