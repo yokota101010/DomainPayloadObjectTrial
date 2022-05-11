@@ -18,17 +18,17 @@ public class User {
 
 	@NotBlank
 	@Email
-	private String id;
+	private String id = "";
 
 	@NotBlank
-	private String name;
+	private String name = "";
 
 	@Min(value=20)
 	@Max(value=65)
-	private int age;
+	private int age = -1;
 
 	@Valid
-	private List<Career> careers;
+	private List<Career> careers = null;
 
 	public User(String id, String name, int age, List<Career> careers) {
 		this.id = id;

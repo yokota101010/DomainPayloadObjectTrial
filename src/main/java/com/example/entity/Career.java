@@ -10,14 +10,14 @@ import lombok.Data;
 @Data
 public class Career {
 
-	private int id;
+	private int id = 0;
 
 	@NotNull
-	private String fromDate;
+	private String fromDate = "";
 
 	@NotBlank
 	@Length(max=100)
-	private String contents;
+	private String contents = "";
 
 	public Career(int id, String fromDate, String contents) {
 		this.id = id;
