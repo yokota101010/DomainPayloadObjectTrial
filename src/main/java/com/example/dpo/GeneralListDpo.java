@@ -1,4 +1,4 @@
-package com.example.form;
+package com.example.dpo;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import com.example.entity.User;
 import lombok.Data;
 
 @Data
-public class GeneralListForm {
+public class GeneralListDpo {
 
 	@Valid
 	private List<User> userList;

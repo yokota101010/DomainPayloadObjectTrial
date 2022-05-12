@@ -10,7 +10,7 @@
 	<div layout:fragment="mainContent">
 
 		<!-- Userの年齢を更新するフォーム -->
-		<form th:action="@{/general/listUpdate}" th:object="${generalListForm}" th:method="post">
+		<form th:action="@{/general/listUpdate}" th:object="${generalListDpo}" th:method="post">
 
 			<div th:each="user, st : *{userList}">
 				<span th:text="*{userList[__${st.index}__].id}"></span>
@@ -23,7 +23,7 @@
 		<br>
 
 		<!-- Userの経歴を更新するフォーム -->
-	    <form th:action="@{/general/listUpdate}" th:object="${generalListForm}" th:method="post">
+	    <form th:action="@{/general/listUpdate}" th:object="${generalListDpo}" th:method="post">
 
 			<div th:each="user, st : *{userList}">
 				<span th:text="*{userList[__${st.index}__].id}"></span>
@@ -38,11 +38,11 @@
 		<br>
 
 		<!-- 本のタイトルを更新するフォーム -->
-    	<form th:action="@{/general/listUpdate}" th:object="${generalListForm}" th:method="post">
+    	<form th:action="@{/general/listUpdate}" th:object="${generalListDpo}" th:method="post">
 
 			<div th:each="book : *{bookMap}">
 				<span th:text="${book.key}"></span>
-				<input type="text" th:field="${generalListForm.bookMap[__${book.getKey()}__].price}">
+				<input type="text" th:field="${generalListDpo.bookMap[__${book.getKey()}__].price}">
 			</div>
 
 			<!-- ボタン -->
