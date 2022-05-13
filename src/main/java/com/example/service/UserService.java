@@ -21,13 +21,13 @@ public class UserService {
 		List<Career> list1 = new ArrayList<>();
 		list1.add(new Career(0, "1977/05/13", "生まれる"));
 		list1.add(new Career(1, "2003/04/01", "入社"));
-		User user1 = new User("user1@sample.co.jp", "高木", 25, list1);
+		User user1 = new User("user1@sample.co.jp", "高木", 25, "情熱のバラバラ", list1);
 
 		//User2の作成
 		List<Career> list2 = new ArrayList<>();
 		list2.add(new Career(0, "1983/06/23", "生まれる"));
 		list2.add(new Career(1, "2013/10/01", "Oxfordへ入学"));
-		User user2 = new User("user2@sample.co.jp", "中本", 30, list2);
+		User user2 = new User("user2@sample.co.jp", "中本", 30, "リンダリンダリンダ", list2);
 
 		//List<User>を作成
 		List<User> userList = new ArrayList<>();

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.dpo.GeneralListDpo;
 import com.example.entity.Book;
+import com.example.entity.MusicRepository;
 import com.example.entity.User;
 import com.example.fw.ModelPlus;
 import com.example.service.BookService;
@@ -30,6 +31,8 @@ public class GeneralController {
 	@Autowired
 	private BookService bookService;
 
+	@Autowired
+	private MusicRepository repository;
 
 	/** 一覧画面を表示 */
 	@GetMapping(value = "/general/list")
@@ -40,11 +43,11 @@ public class GeneralController {
 
 		dpo.setUserList(userList);
 		dpo.setBookMap(bookMap);
+		dpo.setMusicRepository(repository);
 		ModelPlus.addAttribute("generalListDpo", dpo, model);
 
 		return "general/list";
   }
-
 
 	/** 情報更新 */
 	@RequestMapping(value = "/general/listUpdate", method = RequestMethod.POST)
@@ -58,10 +61,13 @@ public class GeneralController {
 
 		//更新結果画面用にmodelに情報を登録（参照だけなのでModelPlusは使わない）
 		model.addAttribute("formServiceUserList", userService.searchAll());
-		model.addAttribute("fromFormUserList",dpo.getUserList());
+		model.addAttribute("fromDpoUserList",dpo.getUserList());
 
 		model.addAttribute("fromServiceBookMap", bookService.searchAll());
-		model.addAttribute("fromFormBookMap", dpo.getBookMap());
+		model.addAttribute("fromDpoBookMap", dpo.getBookMap());
+
+		model.addAttribute("fromDIMusicRepository", repository);
+		model.addAttribute("fromDpoMusicRepository", dpo.getMusicRepository());
 
 		return "general/result";
 	}

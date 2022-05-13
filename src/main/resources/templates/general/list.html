@@ -49,6 +49,17 @@
 			<input type="submit" class="btn btn-primary" value="本の値段を更新">
     	</form>
 
+    	<br>
+
+    	<!-- Repositoryが動作することの確認 -->
+    	<div th:object="${generalListDpo}">
+			<span th:text="*{userList[0].name} + 'が好きな曲「' + *{userList[0].favoriteSong} + '」のBPMは、'"></span>
+			<span th:text="*{musicRepository.getMusic('__*{userList[0].favoriteSong}__').bpm}"></span>
+			<br>
+			<span th:text="*{userList[1].name} + 'が好きな曲「' + *{userList[1].favoriteSong} + '」のBPMは、'"></span>
+			<span th:text="*{musicRepository.getMusic('__*{userList[1].favoriteSong}__').bpm}"></span>
+		</div>
+
 	</div>
 </body>
 </html>

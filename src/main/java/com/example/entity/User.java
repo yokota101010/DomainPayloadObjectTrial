@@ -27,13 +27,17 @@ public class User {
 	@Max(value=65)
 	private int age = -1;
 
+	@NotBlank
+	private String favoriteSong = "";
+
 	@Valid
 	private List<Career> careers = null;
 
-	public User(String id, String name, int age, List<Career> careers) {
+	public User(String id, String name, int age, String favoriteSong, List<Career> careers) {
 		this.id = id;
 		this.name = name;
 		this.age = age;
+		this.favoriteSong =favoriteSong;
 		this.careers = careers;
 	}
 

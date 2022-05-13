@@ -12,8 +12,8 @@
 		<div>サービスから取得したUserList：</div>
 		<div th:text="${formServiceUserList}"></div>
 		<br>
-		<div>Formから取得したUserList：</div>
-		<div th:text="${fromFormUserList}"></div>
+		<div>Dpoから取得したUserList：</div>
+		<div th:text="${fromDpoUserList}"></div>
 
 		<br>
 		<div>------------------------------------------------------------</div>
@@ -22,9 +22,21 @@
 		<div>サービスから取得したBookMap：</div>
 		<div th:text="${fromServiceBookMap}"></div>
 		<br>
-		<div>Formから取得したBookMap：</div>
-		<div th:text="${fromFormBookMap}"></div>
+		<div>Dpoから取得したBookMap：</div>
+		<div th:text="${fromDpoBookMap}"></div>
 
+		<br>
+		<div>------------------------------------------------------------</div>
+		<br>
+
+		<div>DIコンテナから取得したUserRepository：</div>
+		<div th:text="${fromDIMusicRepository}"></div>
+		<br>
+		<div>Dpoから取得したUserRepository：</div>
+		<div th:text="${fromDpoMusicRepository}"></div>
+
+		<br>
+		<div>------------------------------------------------------------</div>
 		<br>
 
 		<a href="/general/list">戻る</a>
