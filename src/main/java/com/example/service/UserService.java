@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.entity.Career;
-import com.example.entity.User;
+import com.example.entity.music.MusicId;
+import com.example.entity.user.Career;
+import com.example.entity.user.User;
 
 /**
  * ユーザー情報 Service
@@ -21,13 +22,13 @@ public class UserService {
 		List<Career> list1 = new ArrayList<>();
 		list1.add(new Career(0, "1977/05/13", "生まれる"));
 		list1.add(new Career(1, "2003/04/01", "入社"));
-		User user1 = new User("user1@sample.co.jp", "高木", 25, "情熱のバラバラ", list1);
+		User user1 = new User("user1@sample.co.jp", "高木", 25, new MusicId("m001"), list1);
 
 		//User2の作成
 		List<Career> list2 = new ArrayList<>();
 		list2.add(new Career(0, "1983/06/23", "生まれる"));
 		list2.add(new Career(1, "2013/10/01", "Oxfordへ入学"));
-		User user2 = new User("user2@sample.co.jp", "中本", 30, "リンダリンダリンダ", list2);
+		User user2 = new User("user2@sample.co.jp", "中本", 30, new MusicId("m002"), list2);
 
 		//List<User>を作成
 		List<User> userList = new ArrayList<>();

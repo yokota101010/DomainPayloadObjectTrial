@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.dpo.GeneralListDpo;
-import com.example.entity.Book;
-import com.example.entity.MusicRepository;
-import com.example.entity.User;
+import com.example.entity.book.Book;
+import com.example.entity.music.MusicRepository;
+import com.example.entity.user.User;
 import com.example.fw.ModelPlus;
 import com.example.service.BookService;
 import com.example.service.UserService;
@@ -31,6 +31,7 @@ public class GeneralController {
 	@Autowired
 	private BookService bookService;
 
+	/** ミュージックRepository */
 	@Autowired
 	private MusicRepository repository;
 

@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.entity.user;
 
 import java.util.List;
 
@@ -7,6 +7,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.example.entity.music.MusicId;
 
 import lombok.Data;
 
@@ -25,19 +28,19 @@ public class User {
 
 	@Min(value=20)
 	@Max(value=65)
-	private int age = -1;
+	private int age = 0;
 
-	@NotBlank
-	private String favoriteSong = "";
+	@NotNull
+	private MusicId favoriteSongId = new MusicId("");
 
 	@Valid
 	private List<Career> careers = null;
 
-	public User(String id, String name, int age, String favoriteSong, List<Career> careers) {
+	public User(String id, String name, int age, MusicId favoriteSongId, List<Career> careers) {
 		this.id = id;
 		this.name = name;
 		this.age = age;
-		this.favoriteSong =favoriteSong;
+		this.favoriteSongId = favoriteSongId;
 		this.careers = careers;
 	}
 

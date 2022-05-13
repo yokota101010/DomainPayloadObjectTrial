@@ -53,11 +53,15 @@
 
     	<!-- Repositoryが動作することの確認 -->
     	<div th:object="${generalListDpo}">
-			<span th:text="*{userList[0].name} + 'が好きな曲「' + *{userList[0].favoriteSong} + '」のBPMは、'"></span>
-			<span th:text="*{musicRepository.getMusic('__*{userList[0].favoriteSong}__').bpm}"></span>
+			<span th:text="*{userList[0].name} + 'が好きな曲は、'"></span>
+			<span th:text="*{musicRepository.getMusic('__*{userList[0].favoriteSongId.id}__').title}"></span>
 			<br>
-			<span th:text="*{userList[1].name} + 'が好きな曲「' + *{userList[1].favoriteSong} + '」のBPMは、'"></span>
-			<span th:text="*{musicRepository.getMusic('__*{userList[1].favoriteSong}__').bpm}"></span>
+			<span th:text="*{userList[1].name} + 'が好きな曲は、'"></span>
+			<span th:text="*{musicRepository.getMusic('__*{userList[1].favoriteSongId.id}__').title}"></span>
+
+			<!-- 参考：値オブジェクトである識別子をnewする方法の場合
+			<span th:text="*{musicRepository.getMusic(new com.example.entity.music.MusicId('__*{userList[1].favoriteSongId.id}__')).title}"></span>
+			 -->
 		</div>
 
 	</div>

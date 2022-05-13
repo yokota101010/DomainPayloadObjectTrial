@@ -5,9 +5,9 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import com.example.entity.Book;
-import com.example.entity.MusicRepository;
-import com.example.entity.User;
+import com.example.entity.book.Book;
+import com.example.entity.music.MusicRepository;
+import com.example.entity.user.User;
 
 import lombok.Data;
 
