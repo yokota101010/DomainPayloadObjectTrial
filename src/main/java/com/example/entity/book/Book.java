@@ -1,15 +1,18 @@
 package com.example.entity.book;
 
+import com.example.entity.Commodity;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class Book {
+@EqualsAndHashCode(callSuper=false)
+public class Book extends Commodity {
 
-	private int price = 0;
 	private String reputation = "";
 
 	public Book(int price, String reputation) {
-		this.price = price;
+		super.price = price;
 		this.reputation = reputation;
 	}
 

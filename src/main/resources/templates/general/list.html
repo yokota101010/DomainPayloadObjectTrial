@@ -23,7 +23,7 @@
 		<br>
 
 		<!-- Userの経歴を更新するフォーム -->
-	    <form th:action="@{/general/listUpdate}" th:object="${generalListDpo}" th:method="post">
+		<form th:action="@{/general/listUpdate}" th:object="${generalListDpo}" th:method="post">
 
 			<div th:each="user, st : *{userList}">
 				<span th:text="*{userList[__${st.index}__].id}"></span>
@@ -33,7 +33,7 @@
 				<textarea rows="3" th:field="*{userList[__${st.index}__].careers[1].contents}"></textarea>
 			</div>
 			<input type="submit" class="btn btn-primary" value="Userの経歴を更新">
-    	</form>
+		</form>
 
 		<br>
 

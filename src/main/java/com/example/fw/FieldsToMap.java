@@ -1,6 +1,7 @@
 package com.example.fw;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,8 +32,10 @@ public class FieldsToMap {
 
 	private void outputFieldsToMap(Object obj, String incompleteName) {
 
+		Field[] declaredAndInheritedFields = getDeclaredAndInheritedFields(obj.getClass());
+
 		try {
-			for(Field field : obj.getClass().getDeclaredFields()) {
+			for(Field field : declaredAndInheritedFields) {
 				field.setAccessible(true);
 
 				//@Repositoryが付与されたfieldはスキップ
@@ -71,7 +74,6 @@ public class FieldsToMap {
 					outputFieldsToMap(
 							field.get(obj),
 							incompleteName + field.getName() + ".");
-
 				}
 			}
 		} catch(IllegalAccessException iae) {
@@ -79,5 +81,21 @@ public class FieldsToMap {
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		}
+	}
+
+	//継承したフィールドも含めてクラスの持つフィールド一覧を取得
+	private Field[] getDeclaredAndInheritedFields(Class<?> clazz) {
+		List<Field> fieldList = new ArrayList<>();
+		getDeclaredAndInheritedFields(clazz, fieldList);
+		return fieldList.toArray(new Field[fieldList.size()]);
+	}
+
+	private void getDeclaredAndInheritedFields(Class<?> clazz, List<Field> fieldList) {
+
+		if(clazz.getSuperclass() != null) {
+			getDeclaredAndInheritedFields(clazz.getSuperclass(), fieldList);
+		}
+
+		fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
 	}
 }

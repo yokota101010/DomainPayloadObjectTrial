@@ -20,10 +20,18 @@
 		<br>
 
 		<div>サービスから取得したBookMap：</div>
-		<div th:text="${fromServiceBookMap}"></div>
+		<div th:each="book : *{fromServiceBookMap}">
+			<span th:text="${book.key}"></span>
+			<span th:text="${book.value.price}"></span>
+			<span th:text="${book.value.reputation}"></span>
+		</div>
 		<br>
 		<div>Dpoから取得したBookMap：</div>
-		<div th:text="${fromDpoBookMap}"></div>
+		<div th:each="book : *{fromDpoBookMap}">
+			<span th:text="${book.key}"></span>
+			<span th:text="${book.value.price}"></span>
+			<span th:text="${book.value.reputation}"></span>
+		</div>
 
 		<br>
 		<div>------------------------------------------------------------</div>

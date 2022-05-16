@@ -14,7 +14,7 @@ public class MusicRepository {
 
 	private Map<MusicId, Music> musicMap
 		= new HashMap<MusicId, Music>() {{
-				put(new MusicId("m001"), new Music(new MusicId("m001"), "情熱のバラバラ", 90));
-				put(new MusicId("m002"), new Music(new MusicId("m002"), "リンダリンダリンダ", 180));
+				put(new MusicId("m001"), new Music(new MusicId("m001"), "情熱のバラバラ", 90, 1000));
+				put(new MusicId("m002"), new Music(new MusicId("m002"), "リンダリンダリンダ", 180, 2000));
 			}};
 }
