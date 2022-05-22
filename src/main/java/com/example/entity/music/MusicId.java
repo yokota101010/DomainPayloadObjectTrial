@@ -16,4 +16,9 @@ public class MusicId {
 
 	public MusicId() {
 	}
+
+	@Override
+	public String toString() {
+		return this.id;
+	}
 }

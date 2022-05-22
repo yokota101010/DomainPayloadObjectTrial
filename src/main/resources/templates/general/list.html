@@ -37,7 +37,7 @@
 
 		<br>
 
-		<!-- 本のタイトルを更新するフォーム -->
+		<!-- 本の値段を更新するフォーム -->
     	<form th:action="@{/general/listUpdate}" th:object="${generalListDpo}" th:method="post">
 
 			<div th:each="book : *{bookMap}">
@@ -52,12 +52,12 @@
     	<br>
 
     	<!-- Repositoryが動作することの確認 -->
-    	<div th:object="${generalListDpo}">
+    	<div th:object="${generalListDpo}" th:with="rep=${repositoryService.getMusicRepository()}">
 			<span th:text="*{userList[0].name} + 'が好きな曲は、'"></span>
-			<span th:text="*{musicRepository.getMusic('__*{userList[0].favoriteSongId.id}__').title}"></span>
+			<span th:text="${rep.getMusic('__*{userList[0].favoriteSongId}__').title}"></span>
 			<br>
 			<span th:text="*{userList[1].name} + 'が好きな曲は、'"></span>
-			<span th:text="*{musicRepository.getMusic('__*{userList[1].favoriteSongId.id}__').title}"></span>
+			<span th:text="${rep.getMusic('__*{userList[1].favoriteSongId}__').title}"></span>
 
 			<!-- 参考：値オブジェクトである識別子をnewする方法の場合
 			<span th:text="*{musicRepository.getMusic(new com.example.entity.music.MusicId('__*{userList[1].favoriteSongId.id}__')).title}"></span>

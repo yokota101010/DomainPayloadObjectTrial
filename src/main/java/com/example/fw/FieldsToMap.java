@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
 public class FieldsToMap {
 
 	private Map<String, String> fieldsMap = new LinkedHashMap<>();
@@ -37,11 +35,6 @@ public class FieldsToMap {
 		try {
 			for(Field field : declaredAndInheritedFields) {
 				field.setAccessible(true);
-
-				//@Repositoryが付与されたfieldはスキップ
-				if(field.getType().getAnnotation(Repository.class) != null) {
-					continue;
-				}
 
 				if(Arrays.asList(primitiveTypes).contains(field.getGenericType().getTypeName())){
 
