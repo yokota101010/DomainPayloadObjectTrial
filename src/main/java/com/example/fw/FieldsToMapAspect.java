@@ -40,6 +40,8 @@ public class FieldsToMapAspect {
 			model.addAttribute("fieldsToMapItems", fieldsToMapItems);
 		}
 
-		model.addAttribute("repositoryService", repositoryService);
+		if(model != null) {
+			model.addAttribute("repositoryService", repositoryService);
+		}
 	}
 }
