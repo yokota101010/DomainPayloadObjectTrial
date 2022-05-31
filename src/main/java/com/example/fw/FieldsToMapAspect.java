@@ -8,8 +8,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.validation.support.BindingAwareModelMap;
 
-import com.example.service.RepositoryService;
+import com.example.fw.annotation.DomainPayloadObject;
 
 @Aspect
 @Component
@@ -29,7 +30,7 @@ public class FieldsToMapAspect {
 			if(methodArgValues[i].getClass().getAnnotation(DomainPayloadObject.class) != null) {
 				dpo = methodArgValues[i];
 			};
-			if(methodArgValues[i] instanceof Model) {
+			if(methodArgValues[i] instanceof BindingAwareModelMap) {
 				model = (Model)methodArgValues[i];
 			}
 		}

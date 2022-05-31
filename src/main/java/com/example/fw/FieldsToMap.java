@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.fw.annotation.Identifier;
+
 public class FieldsToMap {
 
 	private Map<String, String> fieldsMap = new LinkedHashMap<>();
@@ -38,12 +40,17 @@ public class FieldsToMap {
 
 				if(Arrays.asList(primitiveTypes).contains(field.getGenericType().getTypeName())){
 
-					//プリミティブ型
+					//プリミティブ型（⇒出力）
+					fieldsMap.put(incompleteName + field.getName(), field.get(obj).toString());
+
+				} else if(field.getType().getAnnotation(Identifier.class) != null) {
+
+					//識別子型（⇒出力）
 					fieldsMap.put(incompleteName + field.getName(), field.get(obj).toString());
 
 				} else if(field.getGenericType().getTypeName().startsWith("java.util.List")) {
 
-					//List型
+					//List型（⇒要素毎に再帰呼び出し）
 					List<?> list = (List<?>)field.get(obj);
 					for(int i=0; i<list.size(); i++) {
 						outputFieldsToMap(
@@ -53,17 +60,16 @@ public class FieldsToMap {
 
 				} else if(field.getGenericType().getTypeName().startsWith("java.util.Map")) {
 
-					//Map型
+					//Map型（⇒要素毎に再帰呼び出し）
 					Map<?, ?> map = (Map<?, ?>)field.get(obj);
 					for(Object key : map.keySet()) {
 						outputFieldsToMap(
 								map.get(key),
 								incompleteName + field.getName() + "[" + key + "].");
 					}
-
 				} else {
 
-					//その他のクラス型
+					//その他のクラス型（⇒再帰呼び出し）
 					outputFieldsToMap(
 							field.get(obj),
 							incompleteName + field.getName() + ".");

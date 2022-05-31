@@ -1,4 +1,4 @@
-package com.example.fw;
+package com.example.fw.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
