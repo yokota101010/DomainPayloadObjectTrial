@@ -31,7 +31,9 @@ UI層とドメイン層の情報受け渡しをDomainPayloadObject（DPO）[^1]�
 
 - エンティティの定義方法
 
-エンティティのフィールドに直接バリデーション用のアノテーションを付与する。ネスト構造がある場合は@validを付ける。また、NullPointerExceptionの発生を回避する為、初期値の定義も行う。
+  - エンティティのフィールドに直接バリデーション用のアノテーションを付与する。
+  - ネスト構造がある場合は@validを付ける。
+  - NullPointerExceptionの発生を回避する為、初期値の定義を行う。
 
 ```java
 @Data
@@ -74,7 +76,10 @@ public class DivisionListDpo {
 
 - リポジトリサービスの作成とリポジトリ登録方法
 
-フレームワークで用意したRepositoryServiceインタフェースを実装する。例えば下記のように作成する。
+  - フレームワークで用意したRepositoryServiceインタフェースを実装する。
+  - リポジトリのgetterを定義する。
+
+例えば、下記のように作成する。
 
 ```java
 @Service
@@ -114,11 +119,12 @@ public class RepositoryServiceImpl implements RepositoryService {
 
 - FieldsToMap
 
-DPOに登録したエンティティのフィールドをMap形式で出力する（キーはフィールド名、バリューは値）。フィールド名はThymeleafでinput項目のname属性に仕込める形式に加工する。オブジェクトのネスト構造にも対応するので、ルートエンティティから集約内のフィールドを辿ることが出来る。出力結果はMODEL経由でThymeleafに引き渡し（"fieldsToMapItems"という名前で連携）、フロントエンド側のフレームワークで使用する。
+  - DPOに登録したエンティティのフィールドをMap形式で出力する（キーはフィールド名、バリューは値）。フィールド名はThymeleafでinput項目のname属性に仕込める形式に加工する。オブジェクトのネスト構造にも対応するので、ルートエンティティから集約内のフィールドを辿ることが出来る。出力結果はMODEL経由でThymeleafに引き渡しフロントエンド側のフレームワークで使用する。
 
 - FieldsToMapAspect
 
-`@Contoroller`が付与されたクラスに対してAOP（AfterReturning）でFieldsToMapを呼び出す（利用者はFieldsToMapの呼び出しを意識する必要が無い）。FieldsToMapに渡すDPOは、コントローラメソッドの引数の中から`@DomainPayloadObject`が付与されたものを選別する。
+  - `@Contoroller`が付与されたクラスに対してAOP（AfterReturning）でFieldsToMapを呼び出す（利用者はFieldsToMapの呼び出しを意識する必要が無い）。FieldsToMapに渡すDPOは、コントローラメソッドの引数の中から`@DomainPayloadObject`が付与されたものを選別する。
+  - FieldsToMapの出力結果（"fieldsToMapItems"）とリポジトリサービス（"repositoryService"）をMODELへ登録する。
 
 ### フロントエンド側
 
