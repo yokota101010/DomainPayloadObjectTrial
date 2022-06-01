@@ -105,11 +105,55 @@ public class RepositoryServiceImpl implements RepositoryService {
 
 - 個別画面のHTML作成方法
 
-- Thymeleafからのリポジトリ使用方法
+  - 下の例の様に`layout:fragment="mainContent"`とすることでフレームワーク（fieldsToMapBase.html）と連携する。
+  - formタグには画面入力が必要なinput項目のみ記載する。
 
-### その他の注意事項
+```html
+<body>
+	<div layout:fragment="mainContent">
+		：
+		<form th:action="@{/division/detail}" method="post" th:object="${divisionListDpo}">
+			：
+    		</form>
+	</div>
+</body>
+```
+
+- Thymeleafからのリポジトリ使用方法
+  - 使用方法を例示する。
+  - 下記ではbodyタグでdivisionRepositoryの使用を宣言した上で、"${divisionRepository.findOne(‥).name}"部分でリポジトリを使用している。
+
+```java
+<body th:with="divisionRepository=${repositoryService.getDivisionRepository()}">
+	<div layout:fragment="content">
+		：
+		<tbody>
+			<tr th:each="item: *{employeeList}">
+				：
+				<td th:text="${divisionRepository.findOne(
+					'__${item.organizationId}__',
+					'__${item.divisionId}__').name}"></td>
+				：
+			</tr>
+		</tbody>
+		：
+	</div>
+</body>
+```
+
+### その他
 
 - 識別子を値オブジェクトで作成する場合
+
+  - アノテーションを付ける（@Identifier）。
+  - IdObjectを継承。フィールドはStringのidのみ。
+
+```java
+@Identifier
+public class DivisionId extends IdObject {
+	//コンストラクタは省略
+}
+```
 
 ## 設計思想
 
@@ -125,6 +169,11 @@ public class RepositoryServiceImpl implements RepositoryService {
 
   - `@Contoroller`が付与されたクラスに対してAOP（AfterReturning）でFieldsToMapを呼び出す（利用者はFieldsToMapの呼び出しを意識する必要が無い）。FieldsToMapに渡すDPOは、コントローラメソッドの引数の中から`@DomainPayloadObject`が付与されたものを選別する。
   - FieldsToMapの出力結果（"fieldsToMapItems"）とリポジトリサービス（"repositoryService"）をMODELへ登録する。
+
+- 識別子を値オブジェクトで作成する場合
+
+  - `@Identifier`アノテーションを付与することで、バリデーションチェックとしてidフィールドがNullでも空文字でもないことをチェック。
+  - スーパークラスのIdObjectでtoStringを定義しているので（idフィールドを出力するだけ）、Thymeleafの中で識別子を直接扱える（”divisionId.id”のような記載が不要）。FieldsToMapの出力でも識別子オブジェクトを末端の要素と認識し、内部のidフィールドの出力は行わない。
 
 ### フロントエンド側
 
