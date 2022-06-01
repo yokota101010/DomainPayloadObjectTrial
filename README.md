@@ -31,13 +31,70 @@ UI層とドメイン層の情報受け渡しをDomainPayloadObject（DPO）[^1]�
 
 - エンティティの定義方法
 
-- DPOの作成とエンティティ登録方法
+エンティティのフィールドに直接バリデーション用のアノテーションを付与する。ネスト構造がある場合は@validを付ける。また、NullPointerExceptionの発生を回避する為、初期値の定義も行う。
 
-DPOには独自アノテーション`@DomainPayloadObject`を付与する。
+```java
+@Data
+public class Division {
+
+	@Valid
+	@NotNull
+	private OrganizationId organizationId = new OrganizationId("");
+
+	@Valid
+	@NotNull
+	private DivisionId divisionId = new DivisionId("");
+
+	@NotBlank
+	private String name = "";
+
+	@NotNull
+	private String description = "";
+
+	private int numOfEmployees = 0;
+
+	//コンストラクタ等の記載は省略
+}
+```
+
+- DPOの作成とエンティティ登録方法
+  - 独自アノテーション`@DomainPayloadObject`を付与する。
+  - ユースケースで操作対象となるエンティティの参照を1個のみ登録する（エンティティのListやMapも可）。
+  - コントローラの引数とする（これによりMODELに自動登録される）。
+
+例えば、部署情報一覧を扱うユースケースでは下記のようにDPOを作成する。エンティティの登録はコントローラの中で行う。
+
+```java
+@Data
+@DomainPayloadObject
+public class DivisionListDpo {
+	private List<Division> divisionList;
+}
+```
 
 - リポジトリサービスの作成とリポジトリ登録方法
 
-RepositoryServiceインタフェースを実装する。
+フレームワークで用意したRepositoryServiceインタフェースを実装する。例えば下記のように作成する。
+
+```java
+@Service
+public class RepositoryServiceImpl implements RepositoryService {
+
+	@Autowired
+	private DivisionRepository divisionRepository;
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
+
+	public DivisionRepository getDivisionRepository() {
+		return divisionRepository;
+	}
+
+	public EmployeeRepository getEmployeeRepository() {
+		return employeeRepository;
+	}
+}
+```
 
 ### フロントエンド側
 
